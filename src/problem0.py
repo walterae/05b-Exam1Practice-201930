@@ -14,6 +14,7 @@ Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
 
 
 import testing_helper
+import time
 import rosegraphics as rg
 
 
