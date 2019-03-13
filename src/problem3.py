@@ -3,8 +3,8 @@ PRACTICE Exam 1, problem 3.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Audrey Walters.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -38,7 +38,7 @@ def main():
 def run_test_problem3a():
     """ Tests the   problem3a   function. """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement this TEST function.
+    # DONE: 2. Implement this TEST function.
     #   It TESTS the  problem1a  function defined below.
     #   Include at least **   5   ** tests (we wrote four for you).
     # -------------------------------------------------------------------------
@@ -98,11 +98,34 @@ def run_test_problem3a():
 
     window3.close_on_mouse_click()
 
+    # Window 4:
+    title = 'Problem 3a. Test 5: Start at (30, 30), 20 lines'
+    window4 = rg.RoseWindow(450, 300, title)
+
+    # Test 5 (it is on window 4):
+    point = rg.Point(140, 20)
+    expected = 16
+    answer = problem3a(window4, point, 4)
+    print()
+    print('Test 5 expected:', expected)
+    print('       actual:  ', answer)
+
+    # Test 6 (it is on window 4):
+    point = rg.Point(240, 130)
+    expected = 62
+    answer = problem3a(window4, point, 8)
+    print()
+    print('Test 6 expected:', expected)
+    print('       actual:  ', answer)
+
+    window4.close_on_mouse_click()
+
     # -------------------------------------------------------------------------
-    # TO DO: 2 (continued).
+    # DONE: 2 (continued).
     # Below this comment (or integrated with one of the above tests,
     # your choice), add 1 more test case of your own choosing.
     # -------------------------------------------------------------------------
+
 
 
 def problem3a(window, point, n):
@@ -138,7 +161,7 @@ def problem3a(window, point, n):
         :type n:      int
     """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # -------------------------------------------------------------------------
     # -------------------------------------------------------------------------
@@ -146,6 +169,27 @@ def problem3a(window, point, n):
     #    DIFFICULTY:      7 or 8
     #    TIME ESTIMATE:   20 to 35 minutes.
     # -------------------------------------------------------------------------
+    thickness = 1
+    count = 0
+    x1 = point.x
+    y1 = point.y
+    y2 = point.y + 50
+    for _ in range(n):
+        line = rg.Line(rg.Point(x1,y1),rg.Point(x1,y2))
+        line.thickness = thickness
+        line.attach_to(window)
+
+        count = thickness + count
+
+        x1 = x1 + 20
+        y1 = y1 + 10
+        y2 = y2 + 10
+        if thickness < 13:
+            thickness = thickness + 2
+
+    window.render()
+    return count
+
 
 
 def run_test_problem3b():
@@ -202,7 +246,7 @@ def problem3b(m, point1):
         :type point1: rg.Point
     """
     # -------------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ###########################################################################
@@ -215,7 +259,17 @@ def problem3b(m, point1):
     #    DIFFICULTY:      8 or 9
     #    TIME ESTIMATE:   20 to 30 minutes.
     # -------------------------------------------------------------------------
+    window = rg.RoseWindow(400,650)
+    lines = 3
+    count = 0
+    for _ in range(m):
+        val = problem3a(window, point1, lines)
+        count = count + val
 
+        lines = lines + 2
+        point1.y = point1.y +60
+    window.close_on_mouse_click()
+    return count
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------
