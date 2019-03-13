@@ -38,7 +38,7 @@ def main():
 
 
 ###############################################################################
-# TODO: 2.  READ the green doc-string for the:
+# DONE: 2.  READ the green doc-string for the:
 #   - is_prime
 #   - sum_of_digits
 # functions defined below.  You do NOT need to understand their
@@ -137,6 +137,21 @@ def run_test_problem1a():
     actual = problem1a(30, 100)
     print_actual_result_of_test(expected, actual, test_results, precision=3)
 
+    # Test 3:
+    expected = 0.591  # This is APPROXIMATELY the correct answer.
+    print_expected_result_of_test([10, 20], expected, test_results,
+                                  format_string)
+    actual = problem1a(10, 20)
+    print_actual_result_of_test(expected, actual, test_results, precision=3)
+
+    # Test 4:
+    expected = -0.875  # This is APPROXIMATELY the correct answer.
+    print_expected_result_of_test([2, 8], expected, test_results,
+                                  format_string)
+    actual = problem1a(2, 8)
+    print_actual_result_of_test(expected, actual, test_results, precision=3)
+
+
     print_summary_of_test_results(test_results)
 
     # -------------------------------------------------------------------------
@@ -168,7 +183,7 @@ def problem1a(m, n):
       -- If m is 30 and n is 100, the correct answer is about 1.278.
     """
     # -------------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # -------------------------------------------------------------------------
     # -------------------------------------------------------------------------
@@ -176,7 +191,11 @@ def problem1a(m, n):
     #    DIFFICULTY:      5
     #    TIME ESTIMATE:   10 minutes.
     # -------------------------------------------------------------------------
-
+    import math
+    total = 0
+    for k in range (n**2 - m**2 +1):
+        total = math.sin(m**2 +k) +total
+    return total
 
 def run_test_problem1b():
     """ Tests the   problem1b   function. """
@@ -199,6 +218,25 @@ def run_test_problem1b():
     print('Testing the   problem1b   function:')
     print('--------------------------------------------------')
 
+    expected = 5
+    actual = problem1b(3, 5)
+    print('Test 1 expected:', expected)
+    print('       actual:  ', actual)
+
+    expected = 44
+    actual = problem1b(5, 40)
+    print('Test 2 expected:', expected)
+    print('       actual:  ', actual)
+
+    expected = 1
+    actual = problem1b(2, 1)
+    print('Test 3 expected:', expected)
+    print('       actual:  ', actual)
+
+    expected = 5
+    actual = problem1b(2, 6)
+    print('Test 4 expected:', expected)
+    print('       actual:  ', actual)
 
 def problem1b(m, f):
     """
@@ -217,7 +255,7 @@ def problem1b(m, f):
            since there are 44 primes between 5 and 200.
      """
     # -------------------------------------------------------------------------
-    # TODO: 6. Implement and test this function.
+    # DONE: 6. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     ###########################################################################
@@ -230,7 +268,11 @@ def problem1b(m, f):
     #    DIFFICULTY:      5
     #    TIME ESTIMATE:   10 to 15 minutes.
     # -------------------------------------------------------------------------
-
+    count = 0
+    for k in range(f*m+1 - m):
+        if is_prime(m+k):
+            count = count + 1
+    return  count
 
 def run_test_problem1c():
     """ Tests the   problem1c   function. """
