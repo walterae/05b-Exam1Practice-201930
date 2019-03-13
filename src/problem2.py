@@ -3,8 +3,8 @@ PRACTICE Exam 1, problem 2.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Audrey Walters.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -103,7 +103,7 @@ def problem2a(circle, rectangle, window):
       :type window:    rg.RoseWindow
     """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #          Tests have been written for you (above).
     # -------------------------------------------------------------------------
     # -------------------------------------------------------------------------
@@ -111,6 +111,24 @@ def problem2a(circle, rectangle, window):
     #    DIFFICULTY:      6
     #    TIME ESTIMATE:   10 to 15 minutes.
     # -------------------------------------------------------------------------
+    circle.attach_to(window)
+    rectangle.attach_to(window)
+    window.render()
+    window.continue_on_mouse_click()
+    if rectangle.corner_1.y > rectangle.corner_2.y:
+        line = rg.Line(rectangle.corner_1,rectangle.corner_2,)
+        line.attach_to(window)
+    elif rectangle.corner_1.y < rectangle.corner_2.y and rectangle.corner_1.x > rectangle.corner_2.x:
+        line = rg.Line(rectangle.corner_1, rectangle.corner_2)
+        line.attach_to(window)
+    else:
+        line = rg.Line(rg.Point(rectangle.corner_2.x, rectangle.corner_1.y), rg.Point(rectangle.corner_1.x, rectangle.corner_2.y))
+        line.attach_to(window)
+    window.render()
+    window.continue_on_mouse_click()
+
+    circle.fill_color = rectangle.outline_color
+    window.render()
 
 def run_test_problem2b():
     """ Tests the  problem2b   function. """
@@ -174,7 +192,7 @@ def problem2b(rect, n, delta, win):
       :type win:    rg.RoseWindow
     """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DOne: 3. Implement and test this function.
     #          Tests have been written for you (above).
     # -------------------------------------------------------------------------
     # -------------------------------------------------------------------------
@@ -182,7 +200,40 @@ def problem2b(rect, n, delta, win):
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:   15 to 25 minutes.
     # -------------------------------------------------------------------------
+    rect.attach_to(win)
+    x1 = rect.corner_1.x
+    x2 = rect.corner_2.x
+    y1 = rect.corner_1.y
+    y2 = rect.corner_2.y
+    if rect.corner_1.x < rect.corner_2.x:
+        for _ in range(n):
+            rectangle = rg.Rectangle(rg.Point(x1,y1),rg.Point(x2,y2))
+            rectangle.attach_to(win)
 
+            x1= x1 - delta
+            x2 = x2 + delta
+            y1 = y1 - delta
+            y2 = y2 + delta
+    elif rect.corner_1.x > rect.corner_2.x and rect.corner_1.y > rect.corner_2.y:
+        for _ in range(n):
+            rectangle = rg.Rectangle(rg.Point(x1, y1), rg.Point(x2, y2))
+            rectangle.attach_to(win)
+
+            x1 = x1 + delta
+            x2 = x2 - delta
+            y1 = y1 + delta
+            y2 = y2 - delta
+    else:
+        for _ in range(n):
+            rectangle = rg.Rectangle(rg.Point(x1, y1), rg.Point(x2, y2))
+            rectangle.attach_to(win)
+
+            x1 = x1 + delta
+            x2 = x2 - delta
+            y1 = y1 - delta
+            y2 = y2 + delta
+
+    win.render()
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
